@@ -1,0 +1,34 @@
+{   "key":"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",
+    "greeting":{
+        "patterns": [
+            "permisi",
+            "hai tolong bantu saya",
+            "halo",
+            "halo razel",
+            "hai razel",
+            "tolong bantu saya",
+            "selamat malam",
+            "selamat siang",
+            "selamat pagi", 
+            "razel"
+        ],
+        "responses":[
+            "Hey Andra !",
+            "Adakah yang bisa saya bantu andra ?",
+            "Hai andra, Ada apa ?",
+            "oh halo, apa yang bisa saya bantu ?"
+        ]
+    }, 
+    "ask_to_describe":{
+        "positive":[
+            "ya",
+            "baik",
+            "oke", 
+            "boleh"
+        ],
+        "negative":[
+            "tidak",
+            "jangan"
+        ]
+    }
+}

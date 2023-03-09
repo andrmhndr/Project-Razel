@@ -1,0 +1,20 @@
+{   "key":"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",
+    "greeting":[
+        "Hey Andra !",
+        "Adakah yang bisa saya bantu andra ?",
+        "Hai andra, Ada apa ?",
+        "oh halo, apa yang bisa saya bantu ?"
+    ],
+    "ask_to_describe":{
+        "positive":[
+            "ya",
+            "baik",
+            "oke", 
+            "boleh"
+        ],
+        "negative":[
+            "tidak",
+            "jangan"
+        ]
+    }
+}
