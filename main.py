@@ -7,6 +7,7 @@ from repository.data_repository import DataRepository
 from view.main_view import *
 from model.dialog_model import *
 from controller.main_controller import *
+from controller.thread_controller import *
 
 def main():
     # initialize
