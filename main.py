@@ -1,7 +1,6 @@
 import customtkinter as gui
 from datetime import datetime
 import json
-import asyncio
 
 from repository.data_repository import DataRepository
 from view.main_view import *

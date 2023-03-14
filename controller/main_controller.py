@@ -34,7 +34,8 @@ class MainController:
         threading.Thread(target=self.intro_thread).start()
         
     def send_dialog(self):
-        threading.Thread(target=self.send_dialog_thread).start()
+        self.view.show_option()
+        # threading.Thread(target=self.send_dialog_thread).start()
         
     def start_rec(self):
         self.view.entry.configure(state='disabled')

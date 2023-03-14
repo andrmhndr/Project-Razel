@@ -21,9 +21,26 @@ class MainView:
         self.button_rec = customtkinter.CTkButton(self.master, text='record', height=25, width=50)
         self.button_rec.grid(row=1, column=2, padx=(0,20), pady=10, sticky="nsew")
 
+        self.option_window = None
+
     def insert_dialog(self, dialog):
         self.dialog_box.insert("insert", dialog.role + '\t: ' + dialog.content +'\n\n')
         
     def insert_dialog_list(self, dialogs):
         for dialog in dialogs:
             self.insert_dialog(dialog)
+            
+    def show_option(self):
+        if self.option_window is None or not self.option_window.winfo_exists():
+            self.option_window = TopLevelWindow(self.master)
+        else:
+            self.option_window.focus()
+        
+        
+class TopLevelWindow(customtkinter.CTkToplevel):
+    def __init__(self, *args, **kwargs):
+        super().__init__( *args, **kwargs)
+        self.geometry('400x100')
+        
+        self.label = customtkinter.CTkLabel(self, text="test")
+        self.label.pack(padx=20, pady=20)
