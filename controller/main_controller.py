@@ -30,12 +30,10 @@ class MainController:
         self.view.button_send.configure(command=self.send_dialog)
         self.view.button_rec.configure(command=self.start_rec)
         self.view.insert_dialog_list(self.repository.record)
-        print(self.main_color)
         threading.Thread(target=self.intro_thread).start()
         
     def send_dialog(self):
-        self.view.show_option()
-        # threading.Thread(target=self.send_dialog_thread).start()
+        threading.Thread(target=self.send_dialog_thread).start()
         
     def start_rec(self):
         self.view.entry.configure(state='disabled')
@@ -87,7 +85,8 @@ class MainController:
         
     def send_dialog_thread(self):
         message = Dialog('user',self.view.entry.get())
-        self.view.entry.delete(0, len(message.content))
+        self.view.entry.delete(0, 'end')
+        self.update_button_state('disabled')
         self.view.insert_dialog(message)
         self.repository.record.append(message)
         chat_completion = openai.ChatCompletion.create(
@@ -96,5 +95,29 @@ class MainController:
         reply = Dialog('assistant',chat_completion.choices[0].message.content)
         self.view.insert_dialog(reply)
         self.repository.record.append(reply)
-        self.voice_response(reply.content)
         self.repository.save_json()
+        if len(reply.content.split()) > 100:
+            self.reply_cache = reply.content
+            self.view.show_option(self.yes_option, self.no_option)
+            self.voice_response("Text terlalu panjang, apakah anda ingin saya membacakannya ?")
+            self.update_button_state('normal')
+        else:
+            self.voice_response(reply.content)
+            self.update_button_state('normal')
+
+    def yes_option(self):
+        threading.Thread(target=self.read_cache)
+        self.update_button_state('normal')
+        self.view.exit_top_level()
+        
+    def no_option(self):
+        self.view.exit_top_level()
+        self.update_button_state('normal')
+        
+    def read_cache(self):
+        self.voice_response(self.read_cache)
+    
+    def update_button_state(self, state):
+        self.view.entry.configure(state=state)
+        self.view.button_send.configure(state=state)
+        self.view.button_rec.configure(state=state)
